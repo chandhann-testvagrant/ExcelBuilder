@@ -1,9 +1,8 @@
-import org.apache.poi.hssf.usermodel.HSSFCell;
+package model;
+
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
 import java.util.ArrayList;
@@ -11,11 +10,13 @@ import java.util.List;
 
 public class WorkBook {
     
-    HSSFWorkbook workBook;
-    HSSFSheet sheet;
-    WorkBook(HSSFWorkbook workBook){
+    
+    public WorkBook(HSSFWorkbook workBook){
     this.workBook=workBook;
     }
+    
+    private HSSFWorkbook workBook;
+    private  HSSFSheet sheet;
     
     public WorkBook inSheet(String sheetName){
         
@@ -30,7 +31,10 @@ public class WorkBook {
     
         HSSFRow headerRow = sheet.getRow(0);
         
-        headerRow.forEach((cell)->  values.add(dataFormatter.formatCellValue(cell)));
+        headerRow.forEach(
+                (cell)->
+                        values.add(dataFormatter.formatCellValue(cell))
+        );
         
         return values;
     }

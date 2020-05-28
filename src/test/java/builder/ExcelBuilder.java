@@ -1,28 +1,26 @@
+package builder;
 
+import model.WorkBook;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
 
 import java.io.FileOutputStream;
-import java.security.PrivateKey;
 import java.util.Iterator;
 import java.util.List;
 
 public class ExcelBuilder {
 
-String fileName;
-    ExcelBuilder(String fileName){
+    
+    public ExcelBuilder(String fileName){
         this.fileName=fileName;
-        
     }
     
-    
+    private String fileName;
     private HSSFWorkbook workBook = new HSSFWorkbook();
-    
     private HSSFSheet sheet;
     
     
     public ExcelBuilder addSheet(String sheetName){
-    
         workBook.createSheet(sheetName);
         workBook.getSheet(sheetName).createRow((short)0);
         return this;
@@ -30,7 +28,10 @@ String fileName;
     
     public ExcelBuilder addSheets(List<String> sheetNames){
     
-        sheetNames.forEach((sheet)-> addSheet(sheet));
+        sheetNames.forEach(
+                (sheet) ->
+                        addSheet(sheet)
+        );
         
         return this;
     }
@@ -51,10 +52,11 @@ String fileName;
     
     public void addColumnHeaders(String sheetName,List<String> headerNames){
     
-        Iterator<String> names = headerNames.iterator();
-        while(names.hasNext()){
-            appendColumnHeader(sheetName,names.next());
-        }
+        headerNames.forEach(
+                (name) ->
+                        appendColumnHeader(sheetName,name)
+        );
+      
     }
     
     public ExcelBuilder inSheet(String sheetName){
@@ -64,6 +66,7 @@ String fileName;
         }
         
         sheet= workBook.getSheet(sheetName);
+        
         return this;
     }
     
@@ -91,7 +94,10 @@ String fileName;
     }
     
     public void addColumnHeaders(List<String> headerNames){
-        headerNames.forEach((headerName)->appendColumnHeader(headerName));
+        headerNames.forEach(
+                (headerName) ->
+                        appendColumnHeader(headerName)
+        );
     }
     
     public WorkBook build(){

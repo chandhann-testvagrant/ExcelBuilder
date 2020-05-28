@@ -1,23 +1,22 @@
-import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
+package suite;
+
+import builder.ExcelBuilder;
+import model.WorkBook;
+import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.apache.commons.io.FileUtils;
 import org.testng.Assert;
-import org.testng.annotations.Test;;
+import org.testng.annotations.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class main {
+public class Main {
     
     @Test
-    public void test1() throws Exception {
+    public void createExcel() throws Exception {
     
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         File file=new File(classLoader.getResource("data.json").getFile());
