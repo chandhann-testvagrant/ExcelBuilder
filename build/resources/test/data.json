@@ -1,0 +1,13 @@
+{
+  "Promotion Basic":[
+    "promotion id",
+    "promotion title"
+    ],
+
+  "Condition": [
+    "promo id",
+    "included product"
+    ]
+
+
+}
