@@ -1,7 +1,10 @@
 package suite;
 
+import builder.BUY_A_ABOVE_X_GET_DISCOUNT;
 import builder.ExcelBuilder;
+import com.creditdatamw.zerocell.Reader;
 import model.WorkBook;
+import model.WorkBookXlsx;
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,9 +17,57 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Main {
+    @Test
+    public void CreateExcelFromPojo(){
+    
+        File file = new File("./test.xlsx");
+    
+        String sheet = "BUY_A_ABOVE_X_GET_DISCOUNT";
+    
+        List<BUY_A_ABOVE_X_GET_DISCOUNT> people = Reader.of(BUY_A_ABOVE_X_GET_DISCOUNT.class)
+                .from(file)
+                .sheet(sheet)
+                .list();
+    
+        System.out.println("People from the file:"+people.size());
+    
+        for(BUY_A_ABOVE_X_GET_DISCOUNT p: people) {
+            System.out.println(String.format("row:%s data: %s", p.getThreshold(), p.toString()));
+        }
+    
+    }
+    
     
     @Test
-    public void createExcel() throws Exception {
+    public void createExcelFromExcel() throws Exception {
+        
+        WorkBookXlsx workBook= new WorkBookXlsx("test.xlsx");
+        ExcelBuilder builder=new ExcelBuilder("duplicate.xls");
+        
+        
+        Iterator<String> sheetNamesIterator = workBook.getSheetNames().iterator();
+        
+    
+        while(sheetNamesIterator.hasNext()){
+            String sheetName=sheetNamesIterator.next();
+    
+            ExcelBuilder finalBuilder = builder;
+            workBook.inSheet(sheetName).getColumnHeaders().forEach(
+                    (columnName) ->
+                            finalBuilder.inSheet(sheetName)
+                                    .appendColumnHeader(columnName)
+            );
+            
+        }
+        
+        
+        WorkBook workBook1 = builder.build();
+        Assert.assertEquals(workBook1.getSheetNames(),workBook.getSheetNames());
+    }
+    
+    
+    @Test
+    public void createExcelFromJson() throws Exception {
     
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         File file=new File(classLoader.getResource("data.json").getFile());

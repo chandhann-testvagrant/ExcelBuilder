@@ -41,7 +41,7 @@ public class ExcelBuilder {
         int lastCellNum = workBook.getSheet(sheetName).getRow(0).getLastCellNum();
         HSSFCellStyle font = workBook.createCellStyle();
         HSSFFont font1 = workBook.createFont();
-        font1.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        font1.setBold(true);
         font.setFont(font1);
         
         HSSFRow rowhead = workBook.getSheet(sheetName).getRow(0);
@@ -78,7 +78,7 @@ public class ExcelBuilder {
         HSSFCellStyle font = workBook.createCellStyle();
         
         HSSFFont fontStyle = workBook.createFont();
-        fontStyle.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        fontStyle.setBold(true);
         font.setFont(fontStyle);
     
         int lastRowColumnIndex=rowhead.getLastCellNum();

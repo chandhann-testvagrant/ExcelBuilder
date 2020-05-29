@@ -1,7 +1,14 @@
 {
   "Promotion Basic":[
     "promotion id",
-    "promotion title"
+    "promotion title",
+    "PromotionStartDate",
+    "PromotionEndDate",
+    "website",
+    "PromotionDescription",
+    "Priority",
+    "PromotionType"
+
     ],
 
   "Condition": [

@@ -1,42 +1,43 @@
 package model;
 
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.Assert;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class WorkBook {
+public class WorkBookXlsx {
     
-    public WorkBook(HSSFWorkbook workBook){
+    public WorkBookXlsx(XSSFWorkbook workBook){
     this.workBook=workBook;
     }
     
-    public WorkBook(String workBookName){
+    public WorkBookXlsx(String workBookName){
     
         FileInputStream fis=null;
         try {
             fis=new FileInputStream(new File(workBookName));
-            this.workBook=new HSSFWorkbook(fis);
+            this.workBook= new XSSFWorkbook(fis);
             
         } catch (IOException e) {
+    
+            e.printStackTrace();
             Assert.fail("unable to read excel");
         }
     }
     
     
-    private HSSFWorkbook workBook;
-    private  HSSFSheet sheet;
+    private XSSFWorkbook workBook;
+    private XSSFSheet sheet;
     
-    public WorkBook inSheet(String sheetName){
+    public WorkBookXlsx inSheet(String sheetName){
         
         sheet=workBook.getSheet(sheetName);
         return this;
@@ -47,7 +48,7 @@ public class WorkBook {
         List<String> values=new ArrayList<String>();
         DataFormatter dataFormatter = new DataFormatter();
     
-        HSSFRow headerRow = sheet.getRow(0);
+        XSSFRow headerRow = sheet.getRow(0);
         
         headerRow.forEach(
                 (cell)->
@@ -69,4 +70,16 @@ public class WorkBook {
         return sheets;
     }
     
+    public List<XSSFSheet> getSheets(){
+        
+        int noOfSheets=workBook.getNumberOfSheets();
+        
+        List<XSSFSheet> sheets=new ArrayList<XSSFSheet>();
+        for(int i=0;i<noOfSheets;i++){
+            XSSFSheet name=workBook.getSheetAt(i);
+            sheets.add(name);
+        }
+        
+        return sheets;
+    }
 }
