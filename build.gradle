@@ -32,4 +32,13 @@ dependencies {
     // https://mvnrepository.com/artifact/com.creditdatamw.labs/zerocell-processor
     compile group: 'com.creditdatamw.labs', name: 'zerocell-processor', version: '0.4.1'
 
+    compile files('./poi-excel-annotations-1.0.jar')
+
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+
+    // https://mvnrepository.com/artifact/commons-lang/commons-lang
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'org.freemarker', name: 'freemarker', version: '2.3.30'
+
+
 }

@@ -1,5 +1,6 @@
 package builder;
 
+import com.creditdatamw.zerocell.Reader;
 import model.WorkBook;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
@@ -114,6 +115,21 @@ public class ExcelBuilder {
         return new WorkBook(workBook);
     }
     
+    public  <T>  void addSheetData(T Class,List<T> objList){
     
-
+        String[] columns = Reader.columnsOf(Class.class);
+    
+        inSheet(Class.getClass().getName());
+        for (String column:columns){
+                    appendColumnHeader(column);
+        }
+    
+        
+        
+        
+    
+    }
+    
+    
+   
 }

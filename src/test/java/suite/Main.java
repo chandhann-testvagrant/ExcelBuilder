@@ -6,6 +6,7 @@ import com.creditdatamw.zerocell.Reader;
 import model.WorkBook;
 import model.WorkBookXlsx;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.excel.ExcelWriter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.testng.Assert;
@@ -29,12 +30,13 @@ public class Main {
                 .sheet(sheet)
                 .list();
     
+    
         System.out.println("People from the file:"+people.size());
     
-        for(BUY_A_ABOVE_X_GET_DISCOUNT p: people) {
-            System.out.println(String.format("row:%s data: %s", p.getThreshold(), p.toString()));
-        }
+        ExcelBuilder builder = new ExcelBuilder("fromPojoToExcel.xls");
     
+    
+        ExcelWriter.write("./", "fromPojoToExcel.xls", people);
     }
     
     
@@ -42,7 +44,7 @@ public class Main {
     public void createExcelFromExcel() throws Exception {
         
         WorkBookXlsx workBook= new WorkBookXlsx("test.xlsx");
-        ExcelBuilder builder=new ExcelBuilder("duplicate.xls");
+        ExcelBuilder builder=new ExcelBuilder("FromExcelToExcel.xls");
         
         
         Iterator<String> sheetNamesIterator = workBook.getSheetNames().iterator();
@@ -78,7 +80,7 @@ public class Main {
     
         Iterator<String> keys = data.keys();
     
-        ExcelBuilder builder=new ExcelBuilder("test.xls");
+        ExcelBuilder builder=new ExcelBuilder("JsonToExcel.xls");
         
         while (keys.hasNext()){
             
