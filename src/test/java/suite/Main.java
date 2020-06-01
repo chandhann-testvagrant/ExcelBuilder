@@ -33,9 +33,6 @@ public class Main {
     
         System.out.println("People from the file:"+people.size());
     
-        ExcelBuilder builder = new ExcelBuilder("fromPojoToExcel.xls");
-    
-    
         ExcelWriter.write("./", "fromPojoToExcel.xls", people);
     }
     
