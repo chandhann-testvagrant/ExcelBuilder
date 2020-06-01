@@ -1,6 +1,6 @@
 package suite;
 
-import builder.BUY_A_ABOVE_X_GET_DISCOUNT;
+import sheet.BUY_A_ABOVE_X_GET_DISCOUNT;
 import builder.ExcelBuilder;
 import com.creditdatamw.zerocell.Reader;
 import model.WorkBook;
